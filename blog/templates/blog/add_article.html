@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block main %}
+<div style="
+width: 43%; background-color: rgba(255, 213, 24, 0.397);  border-radius: 24px;
+" class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button style="width: 33%; background-color: rgba(0, 255, 13, 0.397); height: 12%; border-radius: 24px;" type="submit">Add</button>
+    </form>
+</div>
+{% endblock main %}

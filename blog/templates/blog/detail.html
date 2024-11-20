@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+{{title}}
+{% endblock title %}
+{% block main %}
+<div>
+    <div class="container mt-3 col-6">
+        <div class="card mb-3">
+            <img src="{{article.get_photo}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{article.title}}</h5>
+                <p class="card-text">{{article.description}}</p>
+                <p class="card-text"><small class="text-body-secondary">{{article.created_at}}</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 col-6">
+        {% if request.user.is_authenticated %}
+        <div>
+            <h4>Add Comment</h4>
+            <form action="{% url 'save_comment' article.id %}" class="mb-3" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{comment_form.title}}
+                <button type="submit" class="btn btn-success mt-3">Add Comment</button>
+            </form>
+        </div>
+        {% endif %}
+        <div>
+            {% for comment in comments %}
+            <div class="card my-3">
+                <div class="card-header">
+                    {{USER}} {{comment.user.username}}
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{comment.title}}</p>
+                        <footer class="blockquote-footer">{{comment.created_at}}</footer>
+                    </blockquote>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

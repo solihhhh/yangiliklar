@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block main %}
+<div class="container" style="width: 33%; font-size:23px;">
+    <form action="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button style="width: 39%; border-radius:24px;" class="btn btn-warning" type="submit">Login</button>
+    </form>
+</div>
+{% endblock main %}
